@@ -2,6 +2,21 @@ package main
 
 
 func main() {
+	//______________________________________________________________________________________
+	// EXCHANGE RATIO
+	// const (
+	// 	ETH = 9 - iota
+	// 	ADA
+	// )
+	// rates := [...]float64{
+	// 	ETH :25.5,  // ethereum
+	// 	ADA : 120.5, // cardano
+	// }
+	// fmt.Printf("1 BTC is %g ETH\n", rates[ETH])
+	// fmt.Printf("1 BTC is %g ADA\n", rates[ADA])
+
+	//______________________________________________________________________________________
+
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	// MOODLY CHALLENGE
 	// args := os.Args[1:]
@@ -80,7 +95,7 @@ func main() {
 	// 	return
 	// }
 
-	// if guess < 0 {
+	// if guess <
 	// 	fmt.Println("Pick a positive number")
 	// 	return
 	// }
