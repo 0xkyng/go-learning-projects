@@ -2,6 +2,30 @@ package main
 
 
 func main() {
+	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	// MOODLY CHALLENGE
+	// args := os.Args[1:]
+
+	// if len(args) != 1 {
+	// 	fmt.Println("[your name]")
+	// 	return
+	// }
+	// name := args[0]
+
+	// moods := [...]string{
+	// 	"feels  sad",
+	// 	"feels terrible",
+	// 	"feels awesome",
+	// 	"feels happy",
+	// 	"feels good",
+	// }
+
+	// rand.Seed(time.Now().UnixNano())
+	// n := rand.Intn(len(moods))
+
+	// fmt.Printf("%s feels %s\n", name, moods[n])
+	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 	//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	// #2 Project
 	// const corpus = "" +
