@@ -20,7 +20,13 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	var names []byte
+
+	total := len(files) * 256
+
+	names := make([]byte, 0, total)
+
+
+	
 	for _, file := range files {
 		if file.Size() == 0 {
 			name := file.Name()
