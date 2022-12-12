@@ -20,13 +20,21 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-
+	var names []byte
 	for _, file := range files {
 		if file.Size() == 0 {
 			name := file.Name()
-			fmt.Println(name)
+			names = append(names, name...)
+			names = append(names, '\n')
 		}
 	}
+
+	err =ioutil.WriteFile("out.txt", names, 0644)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("%s", names)
 	//--------------------------------------------------------------------------------------
 	//______________________________________________________________________________________
 	// EXCHANGE RATIO
