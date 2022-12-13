@@ -1,46 +1,65 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"io/ioutil"
 	"os"
+	"strings"
 )
 
 func main() {
-	//--------------------------------------------------------------------------------------
-	// FILE FINDER PROJECT
-	args := os.Args[1:]
-	if len(args) == 0 {
-		fmt.Println("provide a directory")
-		return
-	}
+	in := bufio.NewScanner(os.Stdin)
+	in.Split(bufio.ScanWords)
 
-	files, err := ioutil.ReadDir(args[0])
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	words := make(map[string]bool)
+	for in.Scan() {
+		word := strings.ToLower(in.Text())
 
-	total := len(files) * 256
-
-	names := make([]byte, 0, total)
-
-
-	
-	for _, file := range files {
-		if file.Size() == 0 {
-			name := file.Name()
-			names = append(names, name...)
-			names = append(names, '\n')
+		if len(word) > 2 {
+			words[word] = true
 		}
 	}
 
-	err =ioutil.WriteFile("out.txt", names, 0644)
-	if err != nil {
-		fmt.Println(err)
+	query := "gopher"
+	if _, ok := words[query]; ok {
+		fmt.Printf("The input contains %q.\n", query)
 		return
 	}
-	fmt.Printf("%s", names)
+	fmt.Printf("The input does not contain %q.\n", query)
+	//--------------------------------------------------------------------------------------
+	// FILE FINDER PROJECT
+	// args := os.Args[1:]
+	// if len(args) == 0 {
+	// 	fmt.Println("provide a directory")
+	// 	return
+	// }
+
+	// files, err := ioutil.ReadDir(args[0])
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return
+	// }
+
+	// total := len(files) * 256
+
+	// names := make([]byte, 0, total)
+
+
+	
+	// for _, file := range files {
+	// 	if file.Size() == 0 {
+	// 		name := file.Name()
+	// 		names = append(names, name...)
+	// 		names = append(names, '\n')
+	// 	}
+	// }
+
+	// err =ioutil.WriteFile("out.txt", names, 0644)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return
+	// }
+	// fmt.Printf("%s", names)
 	//--------------------------------------------------------------------------------------
 	//______________________________________________________________________________________
 	// EXCHANGE RATIO
