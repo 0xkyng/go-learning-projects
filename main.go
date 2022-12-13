@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"regexp"
 	"strings"
 )
 
@@ -15,12 +16,15 @@ func main() {
 	}
 	query := args[0]
 
+	rx := regexp.MustCompile(`[^a-z]+`)
+
 	in := bufio.NewScanner(os.Stdin)
 	in.Split(bufio.ScanWords)
 
 	words := make(map[string]bool)
 	for in.Scan() {
 		word := strings.ToLower(in.Text())
+		word = rx.ReplaceAllString()
 
 		if len(word) > 2 {
 			words[word] = true
