@@ -8,6 +8,13 @@ import (
 )
 
 func main() {
+	args := os.Args[1:]
+	if len(args) != 2 {
+		fmt.Println("Please type a search word")
+		return
+	}
+	query := args[0]
+
 	in := bufio.NewScanner(os.Stdin)
 	in.Split(bufio.ScanWords)
 
@@ -20,12 +27,12 @@ func main() {
 		}
 	}
 
-	query := "gopher"
-	if _, ok := words[query]; ok {
+	
+	if words[query] {
 		fmt.Printf("The input contains %q.\n", query)
 		return
 	}
-	fmt.Printf("The input does not contain %q.\n", query)
+	fmt.Printf("The input does not contain %q.\n", query )
 	//--------------------------------------------------------------------------------------
 	// FILE FINDER PROJECT
 	// args := os.Args[1:]
