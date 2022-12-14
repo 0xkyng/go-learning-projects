@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 func main() {
 	// structs
@@ -22,9 +26,53 @@ func main() {
 	}
 	fmt.Printf("Isaac's game store has %d games.\n\n", len(games))
 
-	for _, g := range games {
-		fmt.Printf("#%d: %-15q %-20s $%d\n",
-			g.id, g.name, "("+g.genre+")", g.price)
+	// in := bufio.NewScanner(os.Stdin)
+	// for {
+	// 	fmt.Printf(`
+	//  > list   : lists all the games
+	//  > quit   : quits
+	//  `)
+
+	// 	if !in.Scan() {
+	// 		break
+	// 	}
+
+	// 	fmt.Println()
+
+	// 	switch in.Text() {
+	// 	case "quit":
+	// 		fmt.Println("bye!")
+	// 		return
+
+	//  1. Scan for the input in a loop (use bufio.Scanner)
+	in := bufio.NewScanner(os.Stdin)
+	for {
+		//  2. Print the available commands.
+		fmt.Printf(`
+		> list : lists all the games
+		> quit: quits
+		`)
+
+		if !in.Scan() {
+			break
+		}
+
+		fmt.Println()
+
+		//  3. Implement the quit command: Quits from the loop.
+		switch in.Text() {
+		case "quit":
+			fmt.Println("bye")
+			return
+
+			// 4. Implement the list command: Lists all the games.
+		case "list":
+			for _, g := range games {
+				fmt.Printf("#%d: %-15q %-20s $%d\n",
+					g.id, g.name, "("+g.genre+")", g.price)
+			}
+		}
+
 	}
 
 	//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
