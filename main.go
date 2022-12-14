@@ -1,42 +1,62 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-	"regexp"
-	"strings"
-)
+import "fmt"
 
 func main() {
-	args := os.Args[1:]
-	if len(args) != 2 {
-		fmt.Println("Please type a search word")
-		return
-	}
-	query := args[0]
-
-	rx := regexp.MustCompile(`[^a-z]+`)
-
-	in := bufio.NewScanner(os.Stdin)
-	in.Split(bufio.ScanWords)
-
-	words := make(map[string]bool)
-	for in.Scan() {
-		word := strings.ToLower(in.Text())
-		word = rx.ReplaceAllString()
-
-		if len(word) > 2 {
-			words[word] = true
-		}
+	// structs
+	type item struct {
+		id    int
+		name  string
+		price int
 	}
 
-	
-	if words[query] {
-		fmt.Printf("The input contains %q.\n", query)
-		return
+	type game struct {
+		item
+		genre string
 	}
-	fmt.Printf("The input does not contain %q.\n", query )
+
+	games := []game{
+		{item: item{id: 1, name: "god of war", price: 50}, genre: "action adventure"},
+		{item: item{id: 2, name: "x-com 2", price: 30}, genre: "strategy"},
+		{item: item{id: 3, name: "minecraft", price: 20}, genre: "sandbox"},
+	}
+	fmt.Printf("Isaac's game store has %d games.\n\n", len(games))
+
+	for _, g := range games {
+		fmt.Printf("#%d: %-15q %-20s $%d\n",
+			g.id, g.name, "("+g.genre+")", g.price)
+	}
+
+	//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	// Scanning for input using bufio.Scanner
+	// args := os.Args[1:]
+	// if len(args) != 2 {
+	// 	fmt.Println("Please type a search word")
+	// 	return
+	// }
+	// query := args[0]
+
+	// rx := regexp.MustCompile(`[^a-z]+`)
+
+	// in := bufio.NewScanner(os.Stdin)
+	// in.Split(bufio.ScanWords)
+
+	// words := make(map[string]bool)
+	// for in.Scan() {
+	// 	word := strings.ToLower(in.Text())
+	// 	word = rx.ReplaceAllString()
+
+	// 	if len(word) > 2 {
+	// 		words[word] = true
+	// 	}
+	// }
+
+	// if words[query] {
+	// 	fmt.Printf("The input contains %q.\n", query)
+	// 	return
+	// }
+	// fmt.Printf("The input does not contain %q.\n", query )
+	//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	//--------------------------------------------------------------------------------------
 	// FILE FINDER PROJECT
 	// args := os.Args[1:]
@@ -55,8 +75,6 @@ func main() {
 
 	// names := make([]byte, 0, total)
 
-
-	
 	// for _, file := range files {
 	// 	if file.Size() == 0 {
 	// 		name := file.Name()
@@ -174,7 +192,7 @@ func main() {
 	// 	n := rand.Intn(guess + 1)
 
 	// 	if n == guess {
-	// 		fmt.Println("🏆 YOU WON!!!")
+	// 		fmt.Println("🏆 YOU WON!!!
 	// 		return
 	// 	}
 	// }
