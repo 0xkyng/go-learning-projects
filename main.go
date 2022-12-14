@@ -9,6 +9,29 @@ import (
 	"strings"
 )
 
+const data = `
+[
+        {
+                "id": 1,
+                "name": "god of war",
+                "genre": "action adventure",
+                "price": 50
+        },
+        {
+                "id": 2,
+                "name": "x-com 2",
+                "genre": "strategy",
+                "price": 40
+        },
+        {
+                "id": 3,
+                "name": "minecraft",
+                "genre": "sandbox",
+                "price": 20
+        }
+]`
+
+
 func main() {
 	// structs
 	type item struct {
@@ -22,11 +45,39 @@ func main() {
 		genre string
 	}
 
-	games := []game{
-		{item: item{id: 1, name: "god of war", price: 50}, genre: "action adventure"},
-		{item: item{id: 2, name: "x-com 2", price: 30}, genre: "strategy"},
-		{item: item{id: 3, name: "minecraft", price: 20}, genre: "sandbox"},
+	// games := []game{
+	// 	{item: item{id: 1, name: "god of war", price: 50}, genre: "action adventure"},
+	// 	{item: item{id: 2, name: "x-com 2", price: 30}, genre: "strategy"},
+	// 	{item: item{id: 3, name: "minecraft", price: 20}, genre: "sandbox"},
+	// }
+
+	// ----------------------------------------------------------
+	// DECODING SOLUTION:
+
+	// encodable and decodable game type
+	type jsonGame struct {
+		ID    int    `json:"id"`
+		Name  string `json:"name"`
+		Genre string `json:"genre"`
+		Price int    `json:"price"`
 	}
+
+	// load the initial data from json
+	var decoded []jsonGame
+	if err := json.Unmarshal([]byte(data), &decoded); err != nil {
+		fmt.Println("Sorry, there is a problem:", err)
+		return
+	}
+
+	// load the data into usual game values
+	var games []game
+	for _, dg := range decoded {
+		games = append(games, game{item{dg.ID, dg.Name, dg.Price}, dg.Genre})
+	}
+	// ----------------------------------------------------------
+
+
+
 	fmt.Printf("Isaac's game store has %d games.\n\n", len(games))
 
 	// index the games by id
