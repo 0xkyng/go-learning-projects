@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"os"
 	"strconv"
@@ -28,7 +29,6 @@ func main() {
 	}
 	fmt.Printf("Isaac's game store has %d games.\n\n", len(games))
 
-	
 	// index the games by id
 	byID := make(map[int]game)
 	for _, g := range games {
@@ -38,10 +38,11 @@ func main() {
 	in := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Printf(`
-      > list   : lists all the games
-      > id N   : queries a game by id
-      > quit   : quits
-     `)
+  > list   : lists all the games
+  > id N   : queries a game by id
+  > save   : exports the data to json and quits
+  > quit   : quits
+`)
 
 		if !in.Scan() {
 			break
@@ -85,6 +86,30 @@ func main() {
 
 			fmt.Printf("#%d: %-15q %-20s $%d\n",
 				g.id, g.name, "("+g.genre+")", g.price)
+
+		case "save":
+			type jsonGame struct {
+				ID    int    `json:"id"`
+				Name  string `json:"name"`
+				Genre string `json:"genre"`
+				Price int    `json:"price"`
+			}
+
+			// load the data into the encodable game values
+			var encodable []jsonGame
+			for _, g := range games {
+				encodable = append(encodable,
+					jsonGame{g.id, g.name, g.genre, g.price})
+			}
+
+			out, err := json.MarshalIndent(encodable, "", "\t")
+			if err != nil {
+				fmt.Println("Sorry:", err)
+				continue
+			}
+
+			fmt.Println(string(out))
+			return
 		}
 	}
 
